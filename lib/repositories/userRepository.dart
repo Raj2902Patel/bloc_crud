@@ -5,7 +5,7 @@ class UserRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<User>> fetchUsers() async {
-    final snapshot = await _firestore.collection('users').get();
+    final snapshot = await _firestore.collection('users').orderBy('name').get();
     return snapshot.docs
         .map(
           (doc) => User(
@@ -31,7 +31,7 @@ class UserRepository {
 
     final docSnapshot = await docRef.get();
     if (!docSnapshot.exists) {
-      throw Exception('Document not found: ${user.id}');
+      throw Exception('Document Not Found: ${user.id}');
     }
 
     await docRef.update({

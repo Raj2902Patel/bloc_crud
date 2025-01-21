@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore:
   flutter_bloc:
   google_fonts:
+  flutter_sliding_toast: ^1.4.3
 
 dev_dependencies:
   flutter_test:

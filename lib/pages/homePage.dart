@@ -1,6 +1,7 @@
 import 'package:bloc_crud/blocs/user_bloc.dart';
 import 'package:bloc_crud/pages/addData.dart';
 import 'package:bloc_crud/pages/updateData.dart';
+import 'package:bloc_crud/widgets/toastWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,6 +64,7 @@ class HomePage extends StatelessWidget {
             }
 
             return ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
@@ -118,6 +120,11 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    const Divider(
+                      thickness: 1, // Set the thickness
+                      height: 1, // Minimize height to avoid extra space
+                      color: Colors.grey,
                     ),
                   ],
                 );
@@ -220,6 +227,22 @@ class HomePage extends StatelessWidget {
                         )),
                     onPressed: () {
                       userBloc.add(DeleteUserEvent(id));
+                      toastDialog(
+                        context: context,
+                        message: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Data has been deleted successfully!",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        leadingIcon: const Icon(Icons.warning),
+                        animationDuration: const Duration(seconds: 1),
+                        displayDuration: const Duration(seconds: 2),
+                      );
                       Navigator.pop(context);
                     },
                     child: const Text(

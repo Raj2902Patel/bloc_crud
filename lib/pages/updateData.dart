@@ -1,4 +1,5 @@
 import 'package:bloc_crud/models/userModel.dart';
+import 'package:bloc_crud/widgets/toastWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -158,6 +159,22 @@ class _UpdateDataState extends State<UpdateData> {
                         context
                             .read<UserBloc>()
                             .add(UpdateUserEvent(updatedUser));
+                        toastDialog(
+                          context: context,
+                          message: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Data has been updated successfully!",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          leadingIcon: const Icon(Icons.info),
+                          animationDuration: const Duration(seconds: 1),
+                          displayDuration: const Duration(seconds: 2),
+                        );
                         Navigator.pop(context);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(

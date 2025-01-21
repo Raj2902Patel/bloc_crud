@@ -1,4 +1,5 @@
 import 'package:bloc_crud/models/userModel.dart';
+import 'package:bloc_crud/widgets/toastWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -143,6 +144,22 @@ class _AddDataPageState extends State<AddDataPage> {
                       );
 
                       context.read<UserBloc>().add(AddUsersEvent(user));
+                      toastDialog(
+                        context: context,
+                        message: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Data has been added successfully!",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        leadingIcon: const Icon(Icons.verified),
+                        animationDuration: const Duration(seconds: 1),
+                        displayDuration: const Duration(seconds: 2),
+                      );
                       Navigator.pop(context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
